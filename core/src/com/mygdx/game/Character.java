@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 
 public class Character {
-    Rectangle charBox1;
+    Rectangle recHB;
     Sprite sprGengar;
     Texture txrReg, txrFlip;
     float fGravity;
@@ -17,13 +17,13 @@ public class Character {
         txrFlip = new Texture("gengarf.png");
         sprGengar = new Sprite(txrReg, 0, 0, 128, 128);
         sprGengar.setSize(Gdx.graphics.getWidth()/5, Gdx.graphics.getWidth()/5);
-        charBox1 = new Rectangle(0f, 0f, sprGengar.getWidth(), sprGengar.getHeight());
+        recHB = new Rectangle(0f, 0f, sprGengar.getWidth(), sprGengar.getHeight());
         this.setPosition(0, 0);
         fGravity = 0;
     }
 
     public int bounds(Rectangle r) {
-        if (charBox1.overlaps(r)) {
+        if (recHB.overlaps(r)) {
             return 1;
         }
         return -1;
@@ -31,43 +31,43 @@ public class Character {
 
     public void action(int type, float x, float y) {
         if (type == 1) {
-            setPosition(charBox1.x, y);
+            setPosition(recHB.x, y);
             fGravity = 0;
         }
         else if (type == 2) {
-            setPosition(x, charBox1.y);
+            setPosition(x, recHB.y);
         }
         else if (type == 3) {
             x -= sprGengar.getWidth();
-            setPosition(x, charBox1.y);
+            setPosition(x, recHB.y);
         }
         else if (type == 4) {
             y -= sprGengar.getHeight();
-            setPosition(charBox1.x, y);
+            setPosition(recHB.x, y);
         }
     }
 
     public void update(float delta) {
         //fGravity = gravity strength
         fGravity -= (40 * delta);
-        charBox1.y += fGravity;
-        sprGengar.setPosition(charBox1.x, charBox1.y);
+        recHB.y += fGravity;
+        sprGengar.setPosition(recHB.x, recHB.y);
     }
 
     public void setPosition(float x, float y) {
-        charBox1.x = x;
-        charBox1.y = y;
+        recHB.x = x;
+        recHB.y = y;
         sprGengar.setPosition(x, y);
     }
 
     public void moveLeft(float delta) {
-        charBox1.x -= (200 * delta);
-        sprGengar.setPosition(charBox1.x, charBox1.y);
+        recHB.x -= (200 * delta);
+        sprGengar.setPosition(recHB.x, recHB.y);
     }
 
     public void moveRight(float delta) {
-        charBox1.x += (200 * delta);
-        sprGengar.setPosition(charBox1.x, charBox1.y);
+        recHB.x += (200 * delta);
+        sprGengar.setPosition(recHB.x, recHB.y);
     }
 
     public void draw1(SpriteBatch batch) {
